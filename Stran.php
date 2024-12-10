@@ -31,11 +31,14 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
             font-family: 'Poppins';
             background: #497ae1;
             color: #fff;
+            display: flex;
+            flex-direction: column;
         }
 
         body {
             display: flex;
             flex-direction: column;
+            justify-content: space-between; /* Distribute space evenly between top and bottom */
         }
 
         .top-bar {
@@ -66,18 +69,24 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
             border-radius: 5px;
         }
 
-        h2 {
+        h1 {
             text-align: center;
             margin: 20px 0;
         }
 
+        /* Centering and Responsiveness for the Form */
         form {
-            background: #003cbc;
-            border-radius: 10px;
-            padding: 20px;
+            flex-grow: 1; /* Allow the form to take up remaining vertical space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
             max-width: 600px;
-            margin: 0 auto 30px;
-            color: white;
+            width: 100%;
+            margin: 70px auto; /* Center the form vertically and horizontally */
+            background-color: #003cbc; /* Optional: background color for the form */
+            border-radius: 8px; /* Optional: rounded corners */
         }
 
         form table {
@@ -105,20 +114,35 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
         }
 
         form input[type="submit"] {
-            background: #ffffff;
-            color: #003cbc;
+            background: #00116f;
+            color: #ffffff;
             font-weight: bold;
             margin-top: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            padding: 20px;
         }
 
         form input[type="submit"]:hover {
-            background: #00116f;
-            color: #ffffff;
+            background: #ffffff;
+            color: #00116f;
         }
 
-        /* Flexbox za slike */
+        /* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    form {
+        max-width: 90%; /* Allow the form to take up 90% of the screen width */
+        margin: 30px auto; /* Center the form with margins on the left and right */
+    }
+
+    form select,
+    form input[type="submit"] {
+        font-size: 14px; /* Slightly smaller font on mobile */
+    }
+}
+
+
+        /* Flexbox for images */
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -153,9 +177,18 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
             color: white;
             text-align: center;
             padding: 30px;
-            position: relative;
             width: 100%;
-            margin-top: auto;
+            position: relative;
+        }
+        
+         select {
+            font-family: 'Poppins';
+            font-size: 16px; /* Dodaj velikost pisave, če je potrebno */
+        }
+
+        /* Spremeni pisavo za opcije */
+        select option {
+            font-family: 'Poppins', sans-serif;
         }
 
         .footer a {
@@ -274,16 +307,7 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
                 right: 35px;
             }
         }
-        
-          select {
-            font-family: 'Poppins';
-            font-size: 16px; /* Dodaj velikost pisave, če je potrebno */
-        }
 
-        /* Spremeni pisavo za opcije */
-        select option {
-            font-family: 'Poppins', sans-serif;
-        }
     </style>
 </head>
 <body>
@@ -309,10 +333,12 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
         </div>
     </div>
 
-    <h2>Izberite trenerja in vadbo</h2>
     <form method="post" action="IzbiraTrenerja.php">
         <input type="hidden" name="idup" value="<?php echo htmlspecialchars($_SESSION["ID"]); ?>">
         <table>
+            <tr>
+                <h1>Izberite trenerja in vadbo</h1>
+            </tr>
             <tr>
                 <th>Osebni trener:</th>
                 <td>
@@ -337,26 +363,12 @@ if (!isset($_SESSION["prijavljen"]) || $_SESSION["prijavljen"] !== TRUE) {
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: center;">
-                    <input type="submit" style="font-family: 'Poppins';" name="submit" value="Izberi">
+                <td style="text-align: center;">
+                    <input type="submit" style="font-family: 'Poppins';" name="submit" value="Potrdi izbor">
                 </td>
             </tr>
         </table>
     </form>
-
-    <h3 style="text-align: center;" style="font-family: 'Poppins';">Najboljši trenerji Tom Lut, Mitja Novak in Nejc Detar</h3>
-
-    <div class="row">
-        <div class="column">
-            <img src="Images/Trener1.jpg" alt="Tom Lut - Specializiran za jogo in prehrano">
-        </div>
-        <div class="column">
-            <img src="Images/Trener2.png" alt="Nejc Detar - Specializiran za dvigovanje uteži in skupinske treninge">
-        </div>
-        <div class="column">
-            <img src="Images/Trener3.jpg" alt="Matija Novak - Specializiran za kalisteniko in planiranje vadb">
-        </div>
-    </div>
 
     <!-- Sticky Footer -->
     <div class="footer">
